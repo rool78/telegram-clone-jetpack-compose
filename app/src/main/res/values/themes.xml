@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Chatclonsecompose" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Chatclonecompose" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

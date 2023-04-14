@@ -4,26 +4,28 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.outlined.AddReaction
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.TextFieldValue
@@ -48,19 +50,48 @@ class MainActivity : ComponentActivity() {
 }
 
 enum class InputSelector {
-    NONE, EMOJI, AUDIO_RECORD
+    NONE, EMOJI, ATTACH_FILE, AUDIO_RECORD
 }
 
 @Composable
 fun MessageComposer() {
     var currentInputSelector by rememberSaveable { mutableStateOf(InputSelector.NONE) }
     val textState = remember { mutableStateOf("") }
-    Row {
-        InputIcon({ currentInputSelector = InputSelector.EMOJI }, Icons.Filled.Face, "emoji icon", false)
-        InputText(textState.value) { textState.value = it }
-        InputIcon({ currentInputSelector = InputSelector.AUDIO_RECORD }, Icons.Filled.Face, "attach icon", false)
-        InputIcon({ currentInputSelector = InputSelector.AUDIO_RECORD }, Icons.Filled.Build, "audio record icon", false)
+    Column {
+        Row {
+            InputIcon(
+                { currentInputSelector = InputSelector.EMOJI },
+                Icons.Outlined.AddReaction,
+                "emoji icon",
+                false
+            )
+            InputText(textState.value) { textState.value = it }
+            InputIcon(
+                { currentInputSelector = InputSelector.ATTACH_FILE },
+                Icons.Filled.AttachFile,
+                "attach file icon",
+                false
+            )
+            InputIcon(
+                { currentInputSelector = InputSelector.AUDIO_RECORD },
+                Icons.Filled.Mic,
+                "audio record icon",
+                false
+            )
+        }
+        InputSelector(inputSelector = currentInputSelector)
     }
+}
+
+@Composable
+fun InputSelector(inputSelector: InputSelector) {
+    val label = when (inputSelector) {
+        InputSelector.NONE -> ""
+        InputSelector.EMOJI -> "Display emoji selector"
+        InputSelector.ATTACH_FILE -> "Attach file"
+        InputSelector.AUDIO_RECORD -> "Audio record"
+    }
+    Text(text = label)
 }
 
 @Composable
@@ -90,7 +121,12 @@ fun InputIcon(
 
 @Composable
 fun InputText(text: String, onValueChanged: (String) -> Unit) {
-    BasicTextField(value = text, onValueChange = onValueChanged)
+    Box {
+        BasicTextField(value = text, onValueChange = onValueChanged)
+        if (text.isEmpty()) { //TODO Manage focus
+            Text(text = "Mensaje", modifier = Modifier.align(Alignment.BottomStart))
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -98,9 +134,9 @@ fun InputText(text: String, onValueChanged: (String) -> Unit) {
 fun Preview() {
     ChatclonsecomposeTheme {
         Row {
-            InputIcon({}, Icons.Filled.Face, "emoji icon", false)
-            InputIcon({}, Icons.Filled.Face, "emoji icon", false)
-            InputIcon({}, Icons.Filled.Build, "emoji icon", false)
+            InputIcon({}, Icons.Outlined.AddReaction, "emoji icon", false)
+            InputIcon({}, Icons.Filled.AttachFile, "attach file icon", false)
+            InputIcon({}, Icons.Filled.Mic, "audio record icon", false)
         }
     }
 }

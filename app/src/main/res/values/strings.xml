@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">chat-clone-compose</string>
+    <string name="members_info">%d members, %d online</string>
+    <string name="message_composer_hint">Message</string>
+    <string name="not_implemented">Not implemented yet</string>
+
+
+    <string name="icon_arrow_description">Arrow back</string>
+    <string name="icon_group_description">Icon group</string>
+    <string name="icon_see_more_description">Icon see more vertical</string>
+    <string name="icon_emoji_description">Icon emoji</string>
+    <string name="icon_attach_file_description">Icon attach file</string>
+    <string name="icon_audio_record_description">Icon audio record</string>
 </resources>

@@ -3,7 +3,7 @@ package io.github.rool.chat_clone_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -15,10 +15,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChatclonsecomposeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MessageComposer()
+                    ChatToolbar()
+//                    MessageComposer()
                 }
             }
         }

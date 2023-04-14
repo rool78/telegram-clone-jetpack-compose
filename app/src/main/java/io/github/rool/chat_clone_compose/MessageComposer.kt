@@ -23,9 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
+import io.github.rool.chat_clonse_compose.R
 
 @Preview(showBackground = true)
 @Composable
@@ -48,7 +50,7 @@ fun MessageComposer() {
             InputIcon(
                 { currentInputType = InputType.EMOJI },
                 Icons.Outlined.AddReaction,
-                "emoji icon",
+                stringResource(id = R.string.icon_emoji_description),
                 false
             )
             InputText(
@@ -60,13 +62,13 @@ fun MessageComposer() {
             InputIcon(
                 { currentInputType = InputType.ATTACH_FILE },
                 Icons.Filled.AttachFile,
-                "attach file icon",
+                stringResource(id = R.string.icon_attach_file_description),
                 false
             )
             InputIcon(
                 { currentInputType = InputType.AUDIO_RECORD },
                 Icons.Filled.Mic,
-                "audio record icon",
+                stringResource(id = R.string.icon_audio_record_description),
                 false
             )
         }
@@ -78,9 +80,9 @@ fun MessageComposer() {
 fun InputSelector(inputType: InputType) {
     val label = when (inputType) {
         InputType.NONE -> ""
-        InputType.EMOJI -> "Display emoji selector"
-        InputType.ATTACH_FILE -> "Attach file"
-        InputType.AUDIO_RECORD -> "Audio record"
+        InputType.EMOJI -> stringResource(id = R.string.not_implemented)
+        InputType.ATTACH_FILE -> stringResource(id = R.string.not_implemented)
+        InputType.AUDIO_RECORD -> stringResource(id = R.string.not_implemented)
     }
     Text(text = label)
 }
@@ -115,7 +117,10 @@ fun InputText(modifier: Modifier = Modifier, text: String, onValueChanged: (Stri
     Box(modifier = modifier) { //needed?
         BasicTextField(value = text, onValueChange = onValueChanged)
         if (text.isEmpty()) { //TODO Manage focus
-            Text(text = "Mensaje", modifier = Modifier.align(Alignment.BottomStart))
+            Text(
+                text = stringResource(id = R.string.message_composer_hint),
+                modifier = Modifier.align(Alignment.BottomStart)
+            )
         }
     }
 }

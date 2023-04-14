@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">chat-clone-compose</string>
-    <string name="members_info">%d members, %d online</string>
+    <string name="members_and_online_info">%d members, %d online</string>
+    <string name="members_info">%d members</string>
     <string name="message_composer_hint">Message</string>
     <string name="not_implemented">Not implemented yet</string>
+    <string name="close">CLOSE</string>
 
 
     <string name="icon_arrow_description">Arrow back</string>

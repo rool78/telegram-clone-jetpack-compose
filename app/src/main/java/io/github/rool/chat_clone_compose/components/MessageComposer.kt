@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose
+package io.github.rool.chat_clone_compose.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -72,19 +72,18 @@ fun MessageComposer() {
                 false
             )
         }
-        InputSelector(inputType = currentInputType)
+        InputSelector(inputType = currentInputType) { currentInputType = InputType.NONE }
     }
 }
 
 @Composable
-fun InputSelector(inputType: InputType) {
-    val label = when (inputType) {
-        InputType.NONE -> ""
-        InputType.EMOJI -> stringResource(id = R.string.not_implemented)
-        InputType.ATTACH_FILE -> stringResource(id = R.string.not_implemented)
-        InputType.AUDIO_RECORD -> stringResource(id = R.string.not_implemented)
+fun InputSelector(inputType: InputType, onDismiss: () -> Unit) {
+    when (inputType) {
+        InputType.NONE -> Unit
+        InputType.EMOJI -> NotAvailablePopup(onDismiss)
+        InputType.ATTACH_FILE -> NotAvailablePopup(onDismiss)
+        InputType.AUDIO_RECORD -> NotAvailablePopup(onDismiss)
     }
-    Text(text = label)
 }
 
 @Composable

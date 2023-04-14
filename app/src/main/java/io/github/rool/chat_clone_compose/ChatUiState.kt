@@ -6,8 +6,6 @@ data class ChatUiState(
     val onlineMembers: Int
 ) {
     companion object {
-        val mockedUiState: ChatUiState = ChatUiState("TLP Practica", 363, 19)
+        val mockedUiState: ChatUiState = ChatUiState("TLP Project", 363, 19)
     }
 }
-
-

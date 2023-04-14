@@ -28,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
@@ -49,47 +48,52 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-enum class InputSelector {
+enum class InputType {
     NONE, EMOJI, ATTACH_FILE, AUDIO_RECORD
 }
 
 @Composable
 fun MessageComposer() {
-    var currentInputSelector by rememberSaveable { mutableStateOf(InputSelector.NONE) }
+    var currentInputType by rememberSaveable { mutableStateOf(InputType.NONE) }
     val textState = remember { mutableStateOf("") }
     Column {
         Row {
             InputIcon(
-                { currentInputSelector = InputSelector.EMOJI },
+                { currentInputType = InputType.EMOJI },
                 Icons.Outlined.AddReaction,
                 "emoji icon",
                 false
             )
-            InputText(textState.value) { textState.value = it }
+            InputText(
+                Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically),
+                textState.value
+            ) { textState.value = it }
             InputIcon(
-                { currentInputSelector = InputSelector.ATTACH_FILE },
+                { currentInputType = InputType.ATTACH_FILE },
                 Icons.Filled.AttachFile,
                 "attach file icon",
                 false
             )
             InputIcon(
-                { currentInputSelector = InputSelector.AUDIO_RECORD },
+                { currentInputType = InputType.AUDIO_RECORD },
                 Icons.Filled.Mic,
                 "audio record icon",
                 false
             )
         }
-        InputSelector(inputSelector = currentInputSelector)
+        InputSelector(inputType = currentInputType)
     }
 }
 
 @Composable
-fun InputSelector(inputSelector: InputSelector) {
-    val label = when (inputSelector) {
-        InputSelector.NONE -> ""
-        InputSelector.EMOJI -> "Display emoji selector"
-        InputSelector.ATTACH_FILE -> "Attach file"
-        InputSelector.AUDIO_RECORD -> "Audio record"
+fun InputSelector(inputType: InputType) {
+    val label = when (inputType) {
+        InputType.NONE -> ""
+        InputType.EMOJI -> "Display emoji selector"
+        InputType.ATTACH_FILE -> "Attach file"
+        InputType.AUDIO_RECORD -> "Audio record"
     }
     Text(text = label)
 }
@@ -120,8 +124,8 @@ fun InputIcon(
 }
 
 @Composable
-fun InputText(text: String, onValueChanged: (String) -> Unit) {
-    Box {
+fun InputText(modifier: Modifier = Modifier, text: String, onValueChanged: (String) -> Unit) {
+    Box(modifier = modifier) { //needed?
         BasicTextField(value = text, onValueChange = onValueChanged)
         if (text.isEmpty()) { //TODO Manage focus
             Text(text = "Mensaje", modifier = Modifier.align(Alignment.BottomStart))

@@ -6,9 +6,10 @@
     <string name="not_implemented">Not implemented yet</string>
     <string name="close">CLOSE</string>
 
+    <string name="image_user_description">Icon group</string>
+    <string name="image_group_description">Icon group</string>
 
     <string name="icon_arrow_description">Arrow back</string>
-    <string name="icon_group_description">Icon group</string>
     <string name="icon_see_more_description">Icon see more vertical</string>
     <string name="icon_emoji_description">Icon emoji</string>
     <string name="icon_attach_file_description">Icon attach file</string>

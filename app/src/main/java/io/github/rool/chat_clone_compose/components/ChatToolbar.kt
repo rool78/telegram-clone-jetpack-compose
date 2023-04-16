@@ -51,7 +51,7 @@ fun ChatToolbar() {
                 .size(40.dp),
             contentScale = ContentScale.Fit,
             painter = painterResource(id = R.drawable.group_chat),
-            contentDescription = stringResource(id = R.string.icon_group_description)
+            contentDescription = stringResource(id = R.string.image_group_description)
         )
         ChatDescription(
             modifier = Modifier

@@ -66,7 +66,7 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
                 stringResource(id = R.string.icon_attach_file_description),
                 false
             )
-            if (textState.value.isEmpty()) {
+            if (textState.value.isEmpty() || textState.value.isBlank()) {
                 InputIcon(
                     { currentInputType = InputType.AUDIO_RECORD },
                     Icons.Filled.Mic,

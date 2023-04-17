@@ -11,15 +11,15 @@ class MainViewModel : ViewModel() {
     val chatUiState = _chatUiState.asStateFlow()
 
     fun sendMessage(content: String) {
-        val messages = _chatUiState.value.messages.plus(
-            Message(
-                Message.AUTHOR_NAME,
-                Color.Transparent,
-                content,
-                "00:00 am" //TODO Parse current time
-            )
-        )
+        val messages = _chatUiState.value.messages.plus(content.toMessage())
         _chatUiState.value = _chatUiState.value.copy(messages = messages)
     }
 
+    private fun String.toMessage(): Message =
+        Message(
+            Message.AUTHOR_NAME,
+            Color.Transparent,
+            this,
+            "00:00 am" //TODO Parse current time
+        )
 }

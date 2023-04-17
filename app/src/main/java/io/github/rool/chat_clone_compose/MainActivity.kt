@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
 import io.github.rool.chat_clone_compose.components.MessageComposer
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatGroupScreen(viewModel: MainViewModel) {
-    val uiState = viewModel.chatUiState.collectAsState()
+    val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     Scaffold(
         topBar = { ChatToolbar() }
     ) { paddingValues ->

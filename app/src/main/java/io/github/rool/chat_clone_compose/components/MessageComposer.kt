@@ -9,6 +9,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.AddReaction
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,7 +34,7 @@ import io.github.rool.chat_clonse_compose.R
 @Composable
 fun MessageComposerPreview() {
     ChatclonsecomposeTheme {
-        MessageComposer()
+        MessageComposer { }
     }
 }
 
@@ -42,7 +43,7 @@ enum class InputType {
 }
 
 @Composable
-fun MessageComposer() {
+fun MessageComposer(onSendMessage: (String) -> Unit) {
     var currentInputType by rememberSaveable { mutableStateOf(InputType.NONE) }
     val textState = remember { mutableStateOf("") }
     Column {
@@ -65,12 +66,24 @@ fun MessageComposer() {
                 stringResource(id = R.string.icon_attach_file_description),
                 false
             )
-            InputIcon(
-                { currentInputType = InputType.AUDIO_RECORD },
-                Icons.Filled.Mic,
-                stringResource(id = R.string.icon_audio_record_description),
-                false
-            )
+            if (textState.value.isEmpty()) {
+                InputIcon(
+                    { currentInputType = InputType.AUDIO_RECORD },
+                    Icons.Filled.Mic,
+                    stringResource(id = R.string.icon_audio_record_description),
+                    false
+                )
+            } else {
+                InputIcon(
+                    {
+                        onSendMessage(textState.value)
+                        textState.value = ""
+                    },
+                    Icons.Filled.Send,
+                    stringResource(id = R.string.icon_send_description),
+                    false
+                )
+            }
         }
         InputSelector(inputType = currentInputType) { currentInputType = InputType.NONE }
     }
@@ -91,7 +104,7 @@ fun InputIcon(
     onClick: () -> Unit,
     icon: ImageVector,
     description: String,
-    isSelected: Boolean
+    isSelected: Boolean //TODO May delete
 ) {
     val modifier = if (isSelected) {
         Modifier.background(

@@ -3,11 +3,14 @@ package io.github.rool.chat_clone_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
@@ -15,27 +18,36 @@ import io.github.rool.chat_clone_compose.components.MessageComposer
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+
+    private val mainViewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ChatclonsecomposeTheme {
-                Scaffold(
-                    topBar = { ChatToolbar() }
-                ) { paddingValues ->
-                    Column(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues)
-                    ) {
-                        ChatContent(
-                            modifier = Modifier.weight(1f),
-                            messages = Message.mockedMessages
-                        )
-                        MessageComposer()
-                    }
-                }
+                ChatGroupScreen(mainViewModel)
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ChatGroupScreen(viewModel: MainViewModel) {
+    val uiState = viewModel.chatUiState.collectAsState()
+    Scaffold(
+        topBar = { ChatToolbar() }
+    ) { paddingValues ->
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            ChatContent(
+                modifier = Modifier.weight(1f),
+                messages = uiState.value.messages
+            )
+            MessageComposer { viewModel.sendMessage(it) }
         }
     }
 }

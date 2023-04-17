@@ -14,4 +14,5 @@
     <string name="icon_emoji_description">Icon emoji</string>
     <string name="icon_attach_file_description">Icon attach file</string>
     <string name="icon_audio_record_description">Icon audio record</string>
+    <string name="icon_send_description">Icon audio record</string>
 </resources>

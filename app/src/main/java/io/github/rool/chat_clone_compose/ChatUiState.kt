@@ -16,6 +16,23 @@ data class Message(
 
     fun isFromAuthor(): Boolean = author == AUTHOR_NAME
 
+    fun toDefaultProfileAuthor(): String {
+        val splitAuthor = author.split(" ")
+        return if (splitAuthor.size > 1) {
+            "${firstCharacterAndUppercase(splitAuthor.first())}${
+                firstCharacterAndUppercase(
+                    splitAuthor[1]
+                )
+            }"
+        } else {
+            firstCharacterAndUppercase(splitAuthor.first())
+        }
+    }
+
+    private fun firstCharacterAndUppercase(text: String): String =
+        text.first().toString().uppercase()
+
+
     companion object {
         val mockedMessages: List<Message> = listOf(
             Message("Frank", Red40, "hey there", "3:03 pm"),

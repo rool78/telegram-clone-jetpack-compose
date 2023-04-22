@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ChatGroupScreen(viewModel: MainViewModel) {
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
     Scaffold(
         topBar = { ChatToolbar() }
     ) { paddingValues ->
@@ -45,9 +47,12 @@ fun ChatGroupScreen(viewModel: MainViewModel) {
         ) {
             ChatContent(
                 modifier = Modifier.weight(1f),
-                messages = uiState.value.messages
+                messages = uiState.value.messages,
             )
-            MessageComposer { viewModel.sendMessage(it) }
+            MessageComposer {
+                viewModel.sendMessage(it)
+                focusManager.clearFocus()
+            }
         }
     }
 }

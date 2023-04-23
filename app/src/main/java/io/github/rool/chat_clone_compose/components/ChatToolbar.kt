@@ -25,8 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.ChatUiState
-import io.github.rool.chat_clone_compose.ui.theme.Blue40Tg
-import io.github.rool.chat_clone_compose.ui.theme.Blue80Tg
+import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
+import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue80
 import io.github.rool.chat_clonse_compose.R
 
 @Preview
@@ -44,7 +44,7 @@ fun ChatToolbar() {
     }
     Row(
         modifier = Modifier
-            .background(Blue40Tg)
+            .background(TelegramBlue40)
             .padding(vertical = 4.dp)
     ) {
         InputIcon(
@@ -96,7 +96,7 @@ fun ChatDescription(modifier: Modifier, chatTitle: String, members: Int, online:
         Text(
             text = membersInfo,
             style = MaterialTheme.typography.titleSmall,
-            color = Blue80Tg
+            color = TelegramBlue80
         )
     }
 }

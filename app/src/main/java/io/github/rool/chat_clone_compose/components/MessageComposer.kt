@@ -9,7 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.outlined.AddReaction
+import androidx.compose.material.icons.outlined.SentimentSatisfied
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
 
 @Preview(showBackground = true)
@@ -49,8 +50,9 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
         Row {
             InputIcon(
                 { currentInputType = InputType.EMOJI },
-                Icons.Outlined.AddReaction,
-                stringResource(id = R.string.icon_emoji_description)
+                Icons.Outlined.SentimentSatisfied,
+                stringResource(id = R.string.icon_emoji_description),
+                TelegramGrey50
             )
             InputText(
                 Modifier
@@ -61,13 +63,15 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
             InputIcon(
                 { currentInputType = InputType.ATTACH_FILE },
                 Icons.Filled.AttachFile,
-                stringResource(id = R.string.icon_attach_file_description)
+                stringResource(id = R.string.icon_attach_file_description),
+                TelegramGrey50
             )
             if (textState.value.isEmpty() || textState.value.isBlank()) {
                 InputIcon(
                     { currentInputType = InputType.AUDIO_RECORD },
-                    Icons.Filled.Mic,
-                    stringResource(id = R.string.icon_audio_record_description)
+                    Icons.Default.Mic,
+                    stringResource(id = R.string.icon_audio_record_description),
+                    TelegramGrey50
                 )
             } else {
                 InputIcon(
@@ -76,7 +80,8 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
                         textState.value = ""
                     },
                     Icons.Filled.Send,
-                    stringResource(id = R.string.icon_send_description)
+                    stringResource(id = R.string.icon_send_description),
+                    TelegramGrey50
                 )
             }
         }
@@ -117,7 +122,8 @@ fun InputText(modifier: Modifier = Modifier, text: String, onValueChanged: (Stri
         if (text.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.message_composer_hint),
-                modifier = Modifier.align(Alignment.BottomStart)
+                modifier = Modifier.align(Alignment.BottomStart),
+                color = TelegramGrey50
             )
         }
     }

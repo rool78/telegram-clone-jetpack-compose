@@ -15,7 +15,7 @@ import io.github.rool.chat_clone_compose.MainViewModel
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
 import io.github.rool.chat_clone_compose.components.MessageComposer
-import io.github.rool.chat_clone_compose.ui.theme.Blue40Tg
+import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +23,7 @@ fun ChatGroupScreen(viewModel: MainViewModel) {
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = Blue40Tg,
+            color = TelegramBlue40,
         )
     }
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()

@@ -14,26 +14,34 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DoneAll
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.Bottom
+import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.Message
-import io.github.rool.chat_clone_compose.ui.theme.MessageFromAuthor
-import io.github.rool.chat_clone_compose.ui.theme.MessageFromAuthorTimestamp
-import io.github.rool.chat_clone_compose.ui.theme.MessageTimestamp
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen50
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen80
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
@@ -42,8 +50,24 @@ fun ChatContentPreview() {
 }
 
 @Composable
+fun ScrollDownFab(modifier: Modifier, onClick: () -> Unit) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        shape = CircleShape,
+        containerColor = White
+    ) {
+        Icon(
+            imageVector = Icons.Filled.KeyboardArrowDown,
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
 fun ChatContent(modifier: Modifier, messages: List<Message>) {
     val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
     LaunchedEffect(messages.size) {
         listState.animateScrollToItem(messages.size)
     }
@@ -62,6 +86,18 @@ fun ChatContent(modifier: Modifier, messages: List<Message>) {
                     val isLastMessage = messages[i].author != nextMessage
                     val isFirstMessage = messages[i].author != previousMessage
                     Message(messages[i], isLastMessage, isFirstMessage, messages[i].isFromAuthor())
+                }
+            }
+        }
+
+        if (listState.canScrollForward) {
+            ScrollDownFab(
+                Modifier
+                    .align(BottomEnd)
+                    .padding(16.dp),
+            ) {
+                scope.launch {
+                    listState.animateScrollToItem(messages.size)
                 }
             }
         }
@@ -110,7 +146,7 @@ fun DefaultChatImage(modifier: Modifier, text: String) {
 fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean) {
     Surface(
         modifier = Modifier.padding(end = 16.dp, top = 4.dp, bottom = 4.dp),
-        color = Color.White,
+        color = White,
         shape = RoundedCornerShape(18.dp, 18.dp, 18.dp, if (isLastMessage) 2.dp else 18.dp)
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
@@ -131,7 +167,7 @@ fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean
                     modifier = Modifier.align(Bottom),
                     style = MaterialTheme.typography.labelSmall,
                     text = message.timestamp,
-                    color = MessageTimestamp
+                    color = TelegramGrey50
                 )
             }
         }
@@ -142,7 +178,7 @@ fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean
 fun MessageFromAuthorBox(message: Message, isLastMessage: Boolean) {
     Surface(
         modifier = Modifier.padding(start = 48.dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
-        color = MessageFromAuthor,
+        color = TelegramGreen80,
         shape = RoundedCornerShape(18.dp, 18.dp, if (isLastMessage) 2.dp else 18.dp, 18.dp)
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
@@ -155,7 +191,15 @@ fun MessageFromAuthorBox(message: Message, isLastMessage: Boolean) {
                 modifier = Modifier.align(Bottom),
                 style = MaterialTheme.typography.labelSmall,
                 text = message.timestamp,
-                color = MessageFromAuthorTimestamp
+                color = TelegramGreen50
+            )
+            Image(
+                imageVector = Icons.Filled.DoneAll, contentDescription = null,
+                colorFilter = ColorFilter.tint(TelegramGreen50),
+                modifier = Modifier
+                    .size(18.dp)
+                    .align(Bottom)
+                    .padding(start = 4.dp)
             )
         }
     }

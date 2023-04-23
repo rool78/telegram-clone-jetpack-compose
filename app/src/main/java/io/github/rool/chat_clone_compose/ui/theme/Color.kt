@@ -2,12 +2,19 @@ package io.github.rool.chat_clone_compose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-//Telegram colors - TODO Include to Design system
+//Telegram colors - TODO Include into Design system
 val Blue40Tg = Color(0xff517da3)
 val Blue80Tg = Color(0xffbbd6ee)
 val MessageTimestamp = Color(0xffb6babd)
 val MessageFromAuthor = Color(0xffeffedd)
 val MessageFromAuthorTimestamp = Color(0xFF94b183)
+
+//Default users/chats colors
+val Default1 = Color(0xff54a4b9)
+val Default2 = Color(0xffd57b2c)
+val Default3 = Color(0xff78b366)
+val Default4 = Color(0xffd68590)
+
 
 val Blue10 = Color(0xFF000F5E)
 val Blue20 = Color(0xFF001E92)

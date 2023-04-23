@@ -1,11 +1,11 @@
 package io.github.rool.chat_clone_compose.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.MoreVert
@@ -18,9 +18,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,20 +42,23 @@ fun ChatToolbar() {
     if (notAvailablePopupVisibility.isVisible()) {
         NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
     }
-    Row(modifier = Modifier.background(Blue40Tg)) {
+    Row(
+        modifier = Modifier
+            .background(Blue40Tg)
+            .padding(vertical = 4.dp)
+    ) {
         InputIcon(
             onClick = { notAvailablePopupVisibility = NotAvailablePopUpVisibility.VISIBLE },
             icon = Icons.Filled.ArrowBack,
             description = stringResource(id = R.string.icon_arrow_description),
             tint = Color.White
         )
-        Image(
-            modifier = Modifier
+        DefaultChatImage(
+            Modifier
                 .padding(4.dp)
-                .size(40.dp),
-            contentScale = ContentScale.Fit,
-            painter = painterResource(id = R.drawable.group_chat),
-            contentDescription = stringResource(id = R.string.image_group_description)
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(uiState.defaultColor), ChatUiState.dafaultName
         )
         ChatDescription(
             modifier = Modifier

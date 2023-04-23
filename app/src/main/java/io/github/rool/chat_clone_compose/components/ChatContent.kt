@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -76,7 +77,7 @@ fun Message(
 ) {
     Row {
         if (isLastMessage && !isFromAuthor) {
-            DefaultChatProfileImage(
+            DefaultChatImage(
                 Modifier
                     .padding(4.dp)
                     .align(Bottom)
@@ -99,9 +100,9 @@ fun Message(
 }
 
 @Composable
-fun DefaultChatProfileImage(modifier: Modifier, text: String) {
+fun DefaultChatImage(modifier: Modifier, text: String) {
     Box(modifier = modifier) {
-        Text(modifier = Modifier.align(Center), text = text)
+        Text(modifier = Modifier.align(Center), text = text, color = White)
     }
 }
 

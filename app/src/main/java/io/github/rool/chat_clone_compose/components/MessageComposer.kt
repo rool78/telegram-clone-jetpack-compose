@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
+import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
 
@@ -81,7 +82,7 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
                     },
                     Icons.Filled.Send,
                     stringResource(id = R.string.icon_send_description),
-                    TelegramGrey50
+                    TelegramBlue40
                 )
             }
         }

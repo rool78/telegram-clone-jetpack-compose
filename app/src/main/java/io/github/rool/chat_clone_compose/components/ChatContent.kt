@@ -23,11 +23,15 @@ import androidx.compose.ui.Alignment.Companion.Bottom
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.Message
+import io.github.rool.chat_clone_compose.ui.theme.MessageFromAuthor
+import io.github.rool.chat_clone_compose.ui.theme.MessageFromAuthorTimestamp
+import io.github.rool.chat_clone_compose.ui.theme.MessageTimestamp
 import io.github.rool.chat_clonse_compose.R
 
 @Preview
@@ -80,13 +84,16 @@ fun Message(
                     .clip(CircleShape)
                     .background(message.authorColor), message.toDefaultProfileAuthor()
             )
-        } else {
-            Spacer(modifier = Modifier.width(48.dp))
         }
         if (isFromAuthor) {
+            Spacer(modifier = Modifier.weight(1f))
             MessageFromAuthorBox(message = message, isLastMessage = isLastMessage)
         } else {
+            if (!isLastMessage) {
+                Spacer(modifier = Modifier.width(48.dp))
+            }
             MessageBox(message = message, isFirstMessage, isLastMessage)
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
@@ -101,11 +108,11 @@ fun DefaultChatProfileImage(modifier: Modifier, text: String) {
 @Composable
 fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean) {
     Surface(
-        modifier = Modifier.padding(4.dp, 4.dp, 48.dp, 4.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier.padding(end = 16.dp, top = 4.dp, bottom = 4.dp),
+        color = Color.White,
         shape = RoundedCornerShape(18.dp, 18.dp, 18.dp, if (isLastMessage) 2.dp else 18.dp)
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(modifier = Modifier.padding(8.dp)) {
             if (isFirstMessage) {
                 Text(
                     style = MaterialTheme.typography.labelLarge,
@@ -114,11 +121,16 @@ fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean
                 )
             }
             Row {
-                Text(text = message.content, modifier = Modifier.weight(1f))
+                Text(
+                    text = message.content, modifier = Modifier
+                        .padding(end = 4.dp)
+                        .weight(1f, false)
+                )
                 Text(
                     modifier = Modifier.align(Bottom),
                     style = MaterialTheme.typography.labelSmall,
-                    text = message.timestamp
+                    text = message.timestamp,
+                    color = MessageTimestamp
                 )
             }
         }
@@ -128,16 +140,21 @@ fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean
 @Composable
 fun MessageFromAuthorBox(message: Message, isLastMessage: Boolean) {
     Surface(
-        modifier = Modifier.padding(48.dp, 4.dp, 4.dp, 4.dp),
-        color = MaterialTheme.colorScheme.inverseSurface,
+        modifier = Modifier.padding(start = 48.dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
+        color = MessageFromAuthor,
         shape = RoundedCornerShape(18.dp, 18.dp, if (isLastMessage) 2.dp else 18.dp, 18.dp)
     ) {
-        Row(modifier = Modifier.padding(12.dp)) {
-            Text(text = message.content, modifier = Modifier.weight(1f))
+        Row(modifier = Modifier.padding(8.dp)) {
+            Text(
+                text = message.content, modifier = Modifier
+                    .padding(end = 4.dp)
+                    .weight(1f, false)
+            )
             Text(
                 modifier = Modifier.align(Bottom),
                 style = MaterialTheme.typography.labelSmall,
-                text = message.timestamp
+                text = message.timestamp,
+                color = MessageFromAuthorTimestamp
             )
         }
     }

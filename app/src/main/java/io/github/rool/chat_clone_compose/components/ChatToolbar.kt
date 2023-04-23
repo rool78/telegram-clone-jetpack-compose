@@ -1,6 +1,7 @@
 package io.github.rool.chat_clone_compose.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -17,12 +18,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.ChatUiState
+import io.github.rool.chat_clone_compose.ui.theme.Blue40Tg
+import io.github.rool.chat_clone_compose.ui.theme.Blue80Tg
 import io.github.rool.chat_clonse_compose.R
 
 @Preview
@@ -38,12 +43,12 @@ fun ChatToolbar() {
     if (notAvailablePopupVisibility.isVisible()) {
         NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
     }
-    Row {
+    Row(modifier = Modifier.background(Blue40Tg)) {
         InputIcon(
             onClick = { notAvailablePopupVisibility = NotAvailablePopUpVisibility.VISIBLE },
             icon = Icons.Filled.ArrowBack,
             description = stringResource(id = R.string.icon_arrow_description),
-            isSelected = false
+            tint = Color.White
         )
         Image(
             modifier = Modifier
@@ -56,6 +61,7 @@ fun ChatToolbar() {
         ChatDescription(
             modifier = Modifier
                 .weight(1f)
+                .padding(start = 8.dp)
                 .align(Alignment.CenterVertically),
             uiState.chatTitle,
             uiState.members,
@@ -65,7 +71,7 @@ fun ChatToolbar() {
             onClick = { notAvailablePopupVisibility = NotAvailablePopUpVisibility.VISIBLE },
             icon = Icons.Outlined.MoreVert,
             description = stringResource(id = R.string.icon_see_more_description),
-            isSelected = false
+            tint = Color.White
         )
     }
 }
@@ -75,11 +81,20 @@ fun ChatDescription(modifier: Modifier, chatTitle: String, members: Int, online:
     Column(
         modifier = modifier
     ) {
-        Text(text = chatTitle, style = MaterialTheme.typography.bodyLarge)
+        Text(
+            text = chatTitle,
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.White,
+            fontWeight = FontWeight.Bold
+        )
         val membersInfo = when {
             online > 0 -> stringResource(id = R.string.members_and_online_info, members, online)
             else -> stringResource(id = R.string.members_info, members)
         }
-        Text(text = membersInfo)
+        Text(
+            text = membersInfo,
+            style = MaterialTheme.typography.titleSmall,
+            color = Blue80Tg
+        )
     }
 }

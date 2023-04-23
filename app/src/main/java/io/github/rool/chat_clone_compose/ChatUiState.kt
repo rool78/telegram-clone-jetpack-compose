@@ -30,7 +30,6 @@ data class Message(
     private fun firstCharacterAndUppercase(text: String): String =
         text.first().toString().uppercase()
 
-
     companion object {
         val mockedMessages: List<Message> = listOf(
             Message("Frank", Red40, "hey there", "3:03"),
@@ -38,7 +37,7 @@ data class Message(
             Message("me", Color.Transparent, "????", "15:27"),
             Message("Pepito", Color.Magenta, "What is worng?", "15:27"),
             Message("me", Color.Transparent, "I do not understand", "15:27"),
-            Message("Oficial Barb", Yellow80, "hello", "15:30 pm"),
+            Message("Oficial Barb", Yellow80, "hello", "15:30"),
             Message("Oficial Barb", Yellow80, "What's up?", "15:30"),
             Message("Frank", Red40, "Not much, I think you should get a node", "15:33"),
             Message(

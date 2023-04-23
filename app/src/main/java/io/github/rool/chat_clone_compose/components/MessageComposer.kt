@@ -1,10 +1,9 @@
 package io.github.rool.chat_clone_compose.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
@@ -23,10 +22,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
 import io.github.rool.chat_clonse_compose.R
 
@@ -51,8 +50,7 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
             InputIcon(
                 { currentInputType = InputType.EMOJI },
                 Icons.Outlined.AddReaction,
-                stringResource(id = R.string.icon_emoji_description),
-                false
+                stringResource(id = R.string.icon_emoji_description)
             )
             InputText(
                 Modifier
@@ -63,15 +61,13 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
             InputIcon(
                 { currentInputType = InputType.ATTACH_FILE },
                 Icons.Filled.AttachFile,
-                stringResource(id = R.string.icon_attach_file_description),
-                false
+                stringResource(id = R.string.icon_attach_file_description)
             )
             if (textState.value.isEmpty() || textState.value.isBlank()) {
                 InputIcon(
                     { currentInputType = InputType.AUDIO_RECORD },
                     Icons.Filled.Mic,
-                    stringResource(id = R.string.icon_audio_record_description),
-                    false
+                    stringResource(id = R.string.icon_audio_record_description)
                 )
             } else {
                 InputIcon(
@@ -80,8 +76,7 @@ fun MessageComposer(onSendMessage: (String) -> Unit) {
                         textState.value = ""
                     },
                     Icons.Filled.Send,
-                    stringResource(id = R.string.icon_send_description),
-                    false
+                    stringResource(id = R.string.icon_send_description)
                 )
             }
         }
@@ -104,31 +99,22 @@ fun InputIcon(
     onClick: () -> Unit,
     icon: ImageVector,
     description: String,
-    isSelected: Boolean //TODO May delete
+    tint: Color = MaterialTheme.colorScheme.secondary
 ) {
-    val modifier = if (isSelected) {
-        Modifier.background(
-            color = MaterialTheme.colorScheme.secondary,
-            shape = RoundedCornerShape(16.dp)
-        )
-    } else {
-        Modifier
-    }
-    IconButton(onClick = onClick, modifier = modifier) {
-        val tint = if (isSelected) {
-            MaterialTheme.colorScheme.onSecondary
-        } else {
-            MaterialTheme.colorScheme.secondary
-        }
+    IconButton(onClick = onClick) {
         Icon(icon, tint = tint, contentDescription = description)
     }
 }
 
 @Composable
 fun InputText(modifier: Modifier = Modifier, text: String, onValueChanged: (String) -> Unit) {
-    Box(modifier = modifier) { //needed?
-        BasicTextField(value = text, onValueChange = onValueChanged)
-        if (text.isEmpty()) { //TODO Manage focus
+    Box(modifier = modifier) {
+        BasicTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = text,
+            onValueChange = onValueChanged
+        )
+        if (text.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.message_composer_hint),
                 modifier = Modifier.align(Alignment.BottomStart)

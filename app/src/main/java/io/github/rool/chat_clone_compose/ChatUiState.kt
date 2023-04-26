@@ -6,6 +6,20 @@ import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault2
 import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault3
 import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault4
 
+data class Chat(
+    val chatTitle: String,
+    val defaultColor: Color,
+    val members: Int,
+    val onlineMembers: Int,
+    val messages: List<Message> = Message.mockedMessages
+) {
+
+    companion object {
+        val mockedChat: Chat = Chat("TLP Práctica", TelegramDefault4, 363, 19)
+        const val defaultName: String = "TP"
+    }
+}
+
 data class Message(
     val author: String,
     val authorColor: Color,
@@ -64,15 +78,9 @@ data class Message(
     }
 }
 
-data class ChatUiState(
-    val chatTitle: String,
-    val defaultColor: Color,
-    val members: Int,
-    val onlineMembers: Int,
-    val messages: List<Message> = Message.mockedMessages,
-) {
+data class ChatUiState(val chat: Chat) {
     companion object {
-        val mockedUiState: ChatUiState = ChatUiState("TLP Práctica", TelegramDefault4, 363, 19)
-        const val dafaultName: String = "TP"
+        val mockedUiState: ChatUiState = ChatUiState(Chat.mockedChat)
+        const val defaultName: String = "TP"
     }
 }

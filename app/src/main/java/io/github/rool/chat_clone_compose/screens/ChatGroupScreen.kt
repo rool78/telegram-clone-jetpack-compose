@@ -6,26 +6,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import io.github.rool.chat_clone_compose.MainViewModel
+import io.github.rool.chat_clone_compose.ChatGroupViewModel
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
 import io.github.rool.chat_clone_compose.components.MessageComposer
-import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatGroupScreen(viewModel: MainViewModel) {
-    val systemUiController = rememberSystemUiController()
-    SideEffect {
-        systemUiController.setStatusBarColor(
-            color = TelegramBlue40,
-        )
-    }
+fun ChatGroupScreen(viewModel: ChatGroupViewModel) {
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Scaffold(
@@ -38,7 +29,7 @@ fun ChatGroupScreen(viewModel: MainViewModel) {
         ) {
             ChatContent(
                 modifier = Modifier.weight(1f),
-                messages = uiState.value.messages,
+                messages = uiState.value.chat.messages,
             )
             MessageComposer {
                 viewModel.sendMessage(it)

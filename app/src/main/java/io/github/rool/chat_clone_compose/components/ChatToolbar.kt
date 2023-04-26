@@ -58,16 +58,16 @@ fun ChatToolbar() {
                 .padding(4.dp)
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(uiState.defaultColor), ChatUiState.dafaultName
+                .background(uiState.chat.defaultColor), ChatUiState.defaultName
         )
         ChatDescription(
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 8.dp)
                 .align(Alignment.CenterVertically),
-            uiState.chatTitle,
-            uiState.members,
-            uiState.onlineMembers
+            uiState.chat.chatTitle,
+            uiState.chat.members,
+            uiState.chat.onlineMembers
         )
         InputIcon(
             onClick = { notAvailablePopupVisibility = NotAvailablePopUpVisibility.VISIBLE },

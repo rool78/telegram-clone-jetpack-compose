@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.components
+package io.github.rool.chat_clone_compose.chat_group.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +32,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import io.github.rool.chat_clone_compose.Message
+import io.github.rool.chat_clone_compose.chat_group.Message
+import io.github.rool.chat_clone_compose.core_components.ScrollDownFab
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen50
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen80
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50

@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.screens
+package io.github.rool.chat_clone_compose.chat_group
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,10 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.ChatGroupViewModel
-import io.github.rool.chat_clone_compose.components.ChatContent
-import io.github.rool.chat_clone_compose.components.ChatToolbar
-import io.github.rool.chat_clone_compose.components.MessageComposer
+import io.github.rool.chat_clone_compose.chat_group.components.ChatContent
+import io.github.rool.chat_clone_compose.chat_group.components.ChatTopBar
+import io.github.rool.chat_clone_compose.chat_group.components.MessageComposer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,7 +20,7 @@ fun ChatGroupScreen(navController: NavController, viewModel: ChatGroupViewModel)
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Scaffold(
-        topBar = { ChatToolbar(navController, uiState.value) }
+        topBar = { ChatTopBar(navController, uiState.value) }
     ) { paddingValues ->
         Column(
             Modifier

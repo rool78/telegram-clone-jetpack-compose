@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose
+package io.github.rool.chat_clone_compose.chat_group
 
 import androidx.compose.ui.graphics.Color
 import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault1

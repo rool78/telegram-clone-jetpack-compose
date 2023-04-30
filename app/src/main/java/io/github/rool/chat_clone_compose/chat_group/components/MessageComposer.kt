@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.components
+package io.github.rool.chat_clone_compose.chat_group.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import io.github.rool.chat_clone_compose.core_components.NotAvailablePopup
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
 import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50

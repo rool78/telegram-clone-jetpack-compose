@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.screens
+package io.github.rool.chat_clone_compose.lobby
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -47,17 +47,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.Chat
-import io.github.rool.chat_clone_compose.LobbyUiState
-import io.github.rool.chat_clone_compose.components.DefaultChatImage
-import io.github.rool.chat_clone_compose.components.InputIcon
-import io.github.rool.chat_clone_compose.components.NotAvailablePopUpVisibility
-import io.github.rool.chat_clone_compose.components.NotAvailablePopup
-import io.github.rool.chat_clone_compose.components.isVisible
+import io.github.rool.chat_clone_compose.chat_group.Chat
+import io.github.rool.chat_clone_compose.chat_group.components.DefaultChatImage
+import io.github.rool.chat_clone_compose.chat_group.components.InputIcon
+import io.github.rool.chat_clone_compose.core_components.NotAvailablePopUpVisibility
+import io.github.rool.chat_clone_compose.core_components.NotAvailablePopup
+import io.github.rool.chat_clone_compose.core_components.isVisible
 import io.github.rool.chat_clone_compose.navigation.ChatCloneScreens
 import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue80
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault1
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen50
 import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
@@ -212,7 +210,7 @@ fun LobbyChatItem(chat: Chat, onItemClick: () -> Unit) {
                 .align(Alignment.Bottom)
                 .size(44.dp)
                 .clip(CircleShape)
-                .background(TelegramDefault1), chat.defaultTitle
+                .background(chat.defaultColor), chat.defaultTitle
         )
         Column(
             modifier = Modifier

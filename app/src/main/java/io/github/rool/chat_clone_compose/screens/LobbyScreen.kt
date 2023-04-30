@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -48,7 +48,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LobbyScreen(navController: NavController) {
-    val uiState = LobbyUiState.mockedLobbyUiState
+    val uiState = LobbyUiState.MockedState.lobbyUiMockedState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ModalNavigationDrawer(
@@ -152,15 +152,18 @@ fun LobbyTopBar(onMenuIconClick: () -> Unit) {
 @Composable
 fun LobbyContent(navController: NavController, lobbyItems: List<Chat>) {
     LazyColumn {
-        items(lobbyItems) {
-            LobbyChatItem { navController.navigate(ChatCloneScreens.ChatGroup.route) }
-            Divider(modifier = Modifier.padding(horizontal = 8.dp))
+        itemsIndexed(lobbyItems) { index, chat ->
+            LobbyChatItem(chat) { navController.navigate(ChatCloneScreens.ChatGroup.route) }
+            if (index < lobbyItems.size - 1) {
+                Divider(modifier = Modifier.padding(horizontal = 8.dp))
+            }
         }
     }
 }
 
 @Composable
-fun LobbyChatItem(onItemClick: () -> Unit) {
+fun LobbyChatItem(chat: Chat, onItemClick: () -> Unit) {
+    val lastMessage = chat.messages.last()
     Row(modifier = Modifier
         .clickable { onItemClick() }
         .padding(vertical = 5.dp)) {
@@ -170,18 +173,18 @@ fun LobbyChatItem(onItemClick: () -> Unit) {
                 .align(Alignment.Bottom)
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(TelegramDefault1), "L"
+                .background(TelegramDefault1), chat.defaultTitle
         )
         Column(
             modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = 12.dp)
         ) {
-            Text(text = "Laura")
-            Text(text = "See you!")
+            Text(text = chat.chatTitle)
+            Text(text = lastMessage.content)
         }
         Column(modifier = Modifier.padding(12.dp)) {
-            Text(text = "15:12")
+            Text(text = lastMessage.timestamp)
         }
     }
 }

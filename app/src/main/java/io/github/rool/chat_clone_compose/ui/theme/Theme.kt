@@ -73,11 +73,9 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun ChatclonsecomposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = LightColorScheme
-    //TODO Dark Mode
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

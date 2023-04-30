@@ -21,7 +21,7 @@ fun ChatGroupScreen(navController: NavController, viewModel: ChatGroupViewModel)
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Scaffold(
-        topBar = { ChatToolbar(navController) }
+        topBar = { ChatToolbar(navController, uiState.value) }
     ) { paddingValues ->
         Column(
             Modifier

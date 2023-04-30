@@ -12,8 +12,8 @@ import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class LobbyUiState(val drawerItems: List<DrawerItem>, val lobbyItems: List<Chat>) {
-    companion object {
-        private val mockedDrawerItem: List<DrawerItem> = listOf(
+    object MockedState {
+        private fun mockedDrawerItem(): List<DrawerItem> = listOf(
             DrawerItem(Icons.Filled.Group, "New group"),
             DrawerItem(Icons.Filled.Person, "Contacts"),
             DrawerItem(Icons.Filled.Call, "Calls"),
@@ -23,8 +23,9 @@ data class LobbyUiState(val drawerItems: List<DrawerItem>, val lobbyItems: List<
             DrawerItem(Icons.Filled.VerifiedUser, "Invite friends"),
             DrawerItem(Icons.Filled.Info, "About me")
         )
-        val mockedLobbyUiState: LobbyUiState =
-            LobbyUiState(mockedDrawerItem, (1..20).map { Chat.mockedChat })
+
+        fun lobbyUiMockedState(): LobbyUiState =
+            LobbyUiState(mockedDrawerItem(), listOf(Chat.mockedChat))
     }
 }
 

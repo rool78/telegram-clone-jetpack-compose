@@ -30,8 +30,7 @@ import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue80
 import io.github.rool.chat_clonse_compose.R
 
 @Composable
-fun ChatToolbar(navController: NavController) {
-    val uiState = ChatUiState.mockedUiState
+fun ChatToolbar(navController: NavController, uiState: ChatUiState) {
     var notAvailablePopupVisibility by rememberSaveable { mutableStateOf(NotAvailablePopUpVisibility.GONE) }
     if (notAvailablePopupVisibility.isVisible()) {
         NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
@@ -52,7 +51,7 @@ fun ChatToolbar(navController: NavController) {
                 .padding(4.dp)
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(uiState.chat.defaultColor), ChatUiState.defaultName
+                .background(uiState.chat.defaultColor), uiState.chat.defaultTitle
         )
         ChatDescription(
             modifier = Modifier

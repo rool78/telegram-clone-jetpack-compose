@@ -2,10 +2,13 @@ package io.github.rool.chat_clone_compose
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class ChatGroupViewModel : ViewModel() {
+@HiltViewModel
+class ChatGroupViewModel @Inject constructor() : ViewModel() {
 
     private val _chatUiState = MutableStateFlow(ChatUiState.mockedUiState)
     val chatUiState = _chatUiState.asStateFlow()

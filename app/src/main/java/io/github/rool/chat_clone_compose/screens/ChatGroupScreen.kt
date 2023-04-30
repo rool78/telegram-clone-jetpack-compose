@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import io.github.rool.chat_clone_compose.ChatGroupViewModel
 import io.github.rool.chat_clone_compose.components.ChatContent
 import io.github.rool.chat_clone_compose.components.ChatToolbar
@@ -16,11 +17,11 @@ import io.github.rool.chat_clone_compose.components.MessageComposer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatGroupScreen(viewModel: ChatGroupViewModel) {
+fun ChatGroupScreen(navController: NavController, viewModel: ChatGroupViewModel) {
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Scaffold(
-        topBar = { ChatToolbar() }
+        topBar = { ChatToolbar(navController) }
     ) { paddingValues ->
         Column(
             Modifier

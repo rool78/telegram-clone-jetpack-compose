@@ -3,16 +3,21 @@ package io.github.rool.chat_clone_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.runtime.SideEffect
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
+import io.github.rool.chat_clone_compose.navigation.ChatCloneScreens
 import io.github.rool.chat_clone_compose.screens.ChatGroupScreen
+import io.github.rool.chat_clone_compose.screens.LobbyScreen
 import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
 import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private val chatGroupViewModel: ChatGroupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +29,18 @@ class MainActivity : ComponentActivity() {
                         color = TelegramBlue40,
                     )
                 }
-//                LobbyScreen()
-                ChatGroupScreen(chatGroupViewModel) //To have its own fragment
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = ChatCloneScreens.Lobby.route
+                ) {
+                    composable(ChatCloneScreens.Lobby.route) {
+                        LobbyScreen(navController)
+                    }
+                    composable(ChatCloneScreens.ChatGroup.route) {
+                        ChatGroupScreen(navController = navController, viewModel = hiltViewModel())
+                    }
+                }
             }
         }
     }

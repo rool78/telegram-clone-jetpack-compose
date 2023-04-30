@@ -7,6 +7,7 @@ import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault3
 import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault4
 
 data class Chat(
+    val channelId: Int,
     val chatTitle: String,
     val defaultColor: Color,
     val members: Int,
@@ -15,7 +16,7 @@ data class Chat(
 ) {
 
     companion object {
-        val mockedChat: Chat = Chat("TLP Práctica", TelegramDefault4, 363, 19)
+        val mockedChat: Chat = Chat(0, "TLP Práctica", TelegramDefault4, 363, 19)
         const val defaultName: String = "TP"
     }
 }

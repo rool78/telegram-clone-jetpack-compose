@@ -1,5 +1,6 @@
 package io.github.rool.chat_clone_compose.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -7,42 +8,59 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.github.rool.chat_clone_compose.Chat
 import io.github.rool.chat_clone_compose.LobbyUiState
 import io.github.rool.chat_clone_compose.components.DefaultChatImage
 import io.github.rool.chat_clone_compose.components.InputIcon
+import io.github.rool.chat_clone_compose.components.NotAvailablePopUpVisibility
+import io.github.rool.chat_clone_compose.components.NotAvailablePopup
+import io.github.rool.chat_clone_compose.components.isVisible
 import io.github.rool.chat_clone_compose.navigation.ChatCloneScreens
 import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
+import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue80
 import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault1
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault3
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGreen50
+import io.github.rool.chat_clone_compose.ui.theme.TelegramGrey50
+import io.github.rool.chat_clonse_compose.R
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +70,6 @@ fun LobbyScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     ModalNavigationDrawer(
-        modifier = Modifier.clip(RoundedCornerShape(0.dp)),
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
@@ -62,14 +79,30 @@ fun LobbyScreen(navController: NavController) {
                         .fillMaxWidth()
                         .padding(8.dp)
                 ) {
-                    DefaultChatImage(
-                        Modifier
-                            .size(80.dp)
-                            .clip(CircleShape)
-                            .background(TelegramDefault3), "ME"
+                    Image(
+                        painter = painterResource(id = R.drawable.profile_pic),
+                        contentDescription = stringResource(id = R.string.user_profile_pic_description),
+
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .size(64.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop
+
                     )
-                    Text(text = "rooL")
-                    Text(text = "+34 712 123 123")
+                    Text(
+                        text = uiState.userName,
+                        color = Color.White,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = uiState.userPhone,
+                        color = TelegramBlue80,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
                 uiState.drawerItems.forEach { item ->
                     DrawerMenuItem(imageVector = item.icon, text = item.text)
@@ -120,6 +153,10 @@ private fun DrawerMenuItem(
 
 @Composable
 fun LobbyTopBar(onMenuIconClick: () -> Unit) {
+    var notAvailablePopupVisibility by rememberSaveable { mutableStateOf(NotAvailablePopUpVisibility.GONE) }
+    if (notAvailablePopupVisibility.isVisible()) {
+        NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
+    }
     Row(
         modifier = Modifier
             .background(TelegramBlue40)
@@ -136,11 +173,13 @@ fun LobbyTopBar(onMenuIconClick: () -> Unit) {
                 .weight(1f)
                 .padding(start = 8.dp)
                 .align(Alignment.CenterVertically),
+            text = "Jetpack Compose Telegram",
+            style = MaterialTheme.typography.titleMedium,
             color = Color.White,
-            text = "Jetpack Compose Telegram"
+            fontWeight = FontWeight.Bold
         )
         InputIcon(
-            onClick = { /*TODO*/ },
+            onClick = { notAvailablePopupVisibility = NotAvailablePopUpVisibility.VISIBLE },
             icon = Icons.Filled.Search,
             description = "icon menu",
             tint = Color.White
@@ -166,25 +205,43 @@ fun LobbyChatItem(chat: Chat, onItemClick: () -> Unit) {
     val lastMessage = chat.messages.last()
     Row(modifier = Modifier
         .clickable { onItemClick() }
-        .padding(vertical = 5.dp)) {
+        .padding(start = 8.dp, top = 8.dp)) {
         DefaultChatImage(
             Modifier
                 .padding(4.dp)
                 .align(Alignment.Bottom)
-                .size(40.dp)
+                .size(44.dp)
                 .clip(CircleShape)
                 .background(TelegramDefault1), chat.defaultTitle
         )
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 12.dp)
+                .padding(horizontal = 8.dp)
+                .align(Alignment.CenterVertically)
         ) {
-            Text(text = chat.chatTitle)
-            Text(text = lastMessage.content)
+            Text(
+                text = chat.chatTitle,
+                color = Color.Black,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = lastMessage.content,
+                color = TelegramGrey50
+            )
         }
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(text = lastMessage.timestamp)
-        }
+        Image(
+            imageVector = Icons.Filled.Done, contentDescription = null,
+            colorFilter = ColorFilter.tint(TelegramGreen50),
+            modifier = Modifier
+                .size(24.dp)
+                .padding(start = 4.dp)
+        )
+        Text(
+            text = lastMessage.timestamp,
+            color = TelegramGrey50,
+            style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.padding(4.dp)
+        )
     }
 }

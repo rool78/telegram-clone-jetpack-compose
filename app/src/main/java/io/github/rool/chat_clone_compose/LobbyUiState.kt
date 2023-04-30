@@ -11,7 +11,12 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class LobbyUiState(val drawerItems: List<DrawerItem>, val lobbyItems: List<Chat>) {
+data class LobbyUiState(
+    val userName: String,
+    val userPhone: String,
+    val drawerItems: List<DrawerItem>,
+    val lobbyItems: List<Chat>
+) {
     object MockedState {
         private fun mockedDrawerItem(): List<DrawerItem> = listOf(
             DrawerItem(Icons.Filled.Group, "New group"),
@@ -25,7 +30,7 @@ data class LobbyUiState(val drawerItems: List<DrawerItem>, val lobbyItems: List<
         )
 
         fun lobbyUiMockedState(): LobbyUiState =
-            LobbyUiState(mockedDrawerItem(), listOf(Chat.mockedChat))
+            LobbyUiState("rooL", "+34 712 123 123", mockedDrawerItem(), listOf(Chat.mockedChat))
     }
 }
 

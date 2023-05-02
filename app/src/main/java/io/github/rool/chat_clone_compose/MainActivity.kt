@@ -10,11 +10,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.rool.chat_clone_compose.chat_group.ChatGroupScreen
-import io.github.rool.chat_clone_compose.lobby.LobbyScreen
-import io.github.rool.chat_clone_compose.navigation.ChatCloneScreens
-import io.github.rool.chat_clone_compose.ui.theme.ChatclonsecomposeTheme
-import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
+import io.github.rool.chat_clone_compose.core.navigation.ChatCloneScreens
+import io.github.rool.chat_clone_compose.core.ui.theme.ChatclonsecomposeTheme
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
+import io.github.rool.chat_clone_compose.features.chat_group.ChatGroupScreen
+import io.github.rool.chat_clone_compose.features.lobby.LobbyScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

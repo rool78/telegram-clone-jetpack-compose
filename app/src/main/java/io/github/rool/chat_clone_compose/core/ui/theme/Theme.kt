@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.ui.theme
+package io.github.rool.chat_clone_compose.core.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

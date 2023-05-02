@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.core_components
+package io.github.rool.chat_clone_compose.core.ui.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme

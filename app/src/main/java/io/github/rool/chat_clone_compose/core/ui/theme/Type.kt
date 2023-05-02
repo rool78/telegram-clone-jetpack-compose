@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.ui.theme
+package io.github.rool.chat_clone_compose.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,20 +1,18 @@
-package io.github.rool.chat_clone_compose.chat_group
+package io.github.rool.chat_clone_compose.features.chat_group
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.chat_group.components.ChatContent
-import io.github.rool.chat_clone_compose.chat_group.components.ChatTopBar
-import io.github.rool.chat_clone_compose.chat_group.components.MessageComposer
+import io.github.rool.chat_clone_compose.features.chat_group.components.ChatContent
+import io.github.rool.chat_clone_compose.features.chat_group.components.ChatTopBar
+import io.github.rool.chat_clone_compose.features.chat_group.components.MessageComposer
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatGroupScreen(navController: NavController, viewModel: ChatGroupViewModel) {
     val uiState = viewModel.chatUiState.collectAsStateWithLifecycle()

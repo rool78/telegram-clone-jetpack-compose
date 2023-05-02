@@ -1,25 +1,9 @@
-package io.github.rool.chat_clone_compose.chat_group
+package io.github.rool.chat_clone_compose.core.models
 
 import androidx.compose.ui.graphics.Color
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault1
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault2
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault3
-import io.github.rool.chat_clone_compose.ui.theme.TelegramDefault4
-
-data class Chat(
-    val channelId: Int,
-    val chatTitle: String,
-    val defaultTitle: String,
-    val defaultColor: Color,
-    val members: Int,
-    val onlineMembers: Int,
-    val messages: List<Message> = Message.mockedMessages
-) {
-
-    companion object {
-        var mockedChat: Chat = Chat(0, "TLP Práctica", "TP", TelegramDefault4, 363, 19)
-    }
-}
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault1
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault2
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault3
 
 data class Message(
     val author: String,
@@ -75,11 +59,5 @@ data class Message(
 
 
         const val AUTHOR_NAME = "me"
-    }
-}
-
-data class ChatUiState(val chat: Chat) {
-    companion object {
-        var mockedUiState: ChatUiState = ChatUiState(Chat.mockedChat)
     }
 }

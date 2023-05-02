@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.lobby
+package io.github.rool.chat_clone_compose.features.lobby
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.ui.graphics.vector.ImageVector
-import io.github.rool.chat_clone_compose.chat_group.Chat
+import io.github.rool.chat_clone_compose.core.models.Chat
 
 data class LobbyUiState(
     val userName: String,

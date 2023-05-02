@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.chat_group.components
+package io.github.rool.chat_clone_compose.features.chat_group.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -24,12 +24,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.chat_group.ChatUiState
-import io.github.rool.chat_clone_compose.core_components.NotAvailablePopUpVisibility
-import io.github.rool.chat_clone_compose.core_components.NotAvailablePopup
-import io.github.rool.chat_clone_compose.core_components.isVisible
-import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue40
-import io.github.rool.chat_clone_compose.ui.theme.TelegramBlue80
+import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopUpVisibility
+import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopup
+import io.github.rool.chat_clone_compose.core.ui.components.isVisible
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
+import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue80
+import io.github.rool.chat_clone_compose.features.chat_group.ChatUiState
 import io.github.rool.chat_clonse_compose.R
 
 @Composable

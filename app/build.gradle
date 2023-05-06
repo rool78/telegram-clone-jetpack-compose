@@ -1,3 +1,5 @@
+import io.github.rool.Config
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -7,14 +9,14 @@ plugins {
 
 android {
     namespace 'io.github.rool.chat_clonse_compose'
-    compileSdk 33
+    compileSdk Config.compileSdk
 
     defaultConfig {
         applicationId "io.github.rool.chat_clonse_compose"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk Config.minSdk
+        targetSdk Config.targetSdk
+        versionCode Config.versionCode
+        versionName Config.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

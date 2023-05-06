@@ -1,4 +1,6 @@
-object Configuration {
+package io.github.rool
+
+object Config {
     const val compileSdk = 33
     const val targetSdk = 33
     const val minSdk = 24

@@ -1,7 +1,7 @@
-package io.github.rool.chat_clone_compose.core.models
+package io.github.rool.chatCloneCompose.core.models
 
 import androidx.compose.ui.graphics.Color
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault4
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramDefault4
 
 data class Chat(
     val channelId: Int,

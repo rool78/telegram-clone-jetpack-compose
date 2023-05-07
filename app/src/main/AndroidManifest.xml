@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <application
-        android:name="io.github.rool.chat_clone_compose.ChatCloseApp"
+        android:name="io.github.rool.chatCloneCompose.ChatCloseApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Chatclonecompose"
         tools:targetApi="31" >
         <activity
-            android:name="io.github.rool.chat_clone_compose.MainActivity"
+            android:name="io.github.rool.chatCloneCompose.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Chatclonecompose" >

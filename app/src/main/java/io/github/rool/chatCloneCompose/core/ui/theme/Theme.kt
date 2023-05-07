@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.core.ui.theme
+package io.github.rool.chatCloneCompose.core.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -71,7 +71,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun ChatclonsecomposeTheme(
+fun ChatCloneComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.features.lobby
+package io.github.rool.chatCloneCompose.features.lobby
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -46,17 +46,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.core.models.Chat
-import io.github.rool.chat_clone_compose.core.navigation.ChatCloneScreens
-import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopUpVisibility
-import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopup
-import io.github.rool.chat_clone_compose.core.ui.components.isVisible
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue80
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGreen50
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGrey50
-import io.github.rool.chat_clone_compose.features.chat_group.components.DefaultChatImage
-import io.github.rool.chat_clone_compose.features.chat_group.components.InputIcon
+import io.github.rool.chatCloneCompose.core.models.Chat
+import io.github.rool.chatCloneCompose.core.navigation.ChatCloneScreens
+import io.github.rool.chatCloneCompose.core.ui.components.NotAvailablePopUpVisibility
+import io.github.rool.chatCloneCompose.core.ui.components.NotAvailablePopup
+import io.github.rool.chatCloneCompose.core.ui.components.isVisible
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue40
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue80
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGreen50
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGrey50
+import io.github.rool.chatCloneCompose.features.chatGroup.components.DefaultChatImage
+import io.github.rool.chatCloneCompose.features.chatGroup.components.InputIcon
 import io.github.rool.chat_clonse_compose.R
 import kotlinx.coroutines.launch
 
@@ -77,7 +77,9 @@ fun LobbyScreen(navController: NavController) {
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.profile_pic),
-                        contentDescription = stringResource(id = R.string.user_profile_pic_description),
+                        contentDescription = stringResource(
+                            id = R.string.user_profile_pic_description
+                        ),
 
                         modifier = Modifier
                             .padding(8.dp)
@@ -104,14 +106,16 @@ fun LobbyScreen(navController: NavController) {
                     DrawerMenuItem(imageVector = item.icon, text = item.text)
                 }
             }
-        }) {
-        Scaffold(topBar = {
-            LobbyTopBar {
-                scope.launch {
-                    drawerState.open()
+        }
+    ) {
+        Scaffold(
+            topBar = {
+                LobbyTopBar {
+                    scope.launch {
+                        drawerState.open()
+                    }
                 }
-            }
-        },
+            },
             content = { paddingValues ->
                 Column(
                     Modifier
@@ -120,7 +124,8 @@ fun LobbyScreen(navController: NavController) {
                 ) {
                     LobbyContent(navController, uiState.lobbyItems)
                 }
-            })
+            }
+        )
     }
 }
 
@@ -135,21 +140,24 @@ private fun DrawerMenuItem(
             .fillMaxWidth()
             .clickable { onItemClick() }
             .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             imageVector = imageVector,
-            contentDescription = null,
+            contentDescription = null
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(text = text)
     }
 }
 
-
 @Composable
 fun LobbyTopBar(onMenuIconClick: () -> Unit) {
-    var notAvailablePopupVisibility by rememberSaveable { mutableStateOf(NotAvailablePopUpVisibility.GONE) }
+    var notAvailablePopupVisibility by rememberSaveable {
+        mutableStateOf(
+            NotAvailablePopUpVisibility.GONE
+        )
+    }
     if (notAvailablePopupVisibility.isVisible()) {
         NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
     }
@@ -181,7 +189,6 @@ fun LobbyTopBar(onMenuIconClick: () -> Unit) {
             tint = Color.White
         )
     }
-
 }
 
 @Composable
@@ -199,16 +206,19 @@ fun LobbyContent(navController: NavController, lobbyItems: List<Chat>) {
 @Composable
 fun LobbyChatItem(chat: Chat, onItemClick: () -> Unit) {
     val lastMessage = chat.messages.last()
-    Row(modifier = Modifier
-        .clickable { onItemClick() }
-        .padding(start = 8.dp, top = 8.dp)) {
+    Row(
+        modifier = Modifier
+            .clickable { onItemClick() }
+            .padding(start = 8.dp, top = 8.dp)
+    ) {
         DefaultChatImage(
             Modifier
                 .padding(4.dp)
                 .align(Alignment.Bottom)
                 .size(44.dp)
                 .clip(CircleShape)
-                .background(chat.defaultColor), chat.defaultTitle
+                .background(chat.defaultColor),
+            chat.defaultTitle
         )
         Column(
             modifier = Modifier
@@ -227,7 +237,8 @@ fun LobbyChatItem(chat: Chat, onItemClick: () -> Unit) {
             )
         }
         Image(
-            imageVector = Icons.Filled.Done, contentDescription = null,
+            imageVector = Icons.Filled.Done,
+            contentDescription = null,
             colorFilter = ColorFilter.tint(TelegramGreen50),
             modifier = Modifier
                 .size(24.dp)

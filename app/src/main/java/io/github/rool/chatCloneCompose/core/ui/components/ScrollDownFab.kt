@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.core.ui.components
+package io.github.rool.chatCloneCompose.core.ui.components
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons

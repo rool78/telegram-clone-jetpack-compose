@@ -1,10 +1,10 @@
-package io.github.rool.chat_clone_compose.features.chat_group
+package io.github.rool.chatCloneCompose.features.chatGroup
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.rool.chat_clone_compose.core.models.Chat
-import io.github.rool.chat_clone_compose.core.models.Message
+import io.github.rool.chatCloneCompose.core.models.Chat
+import io.github.rool.chatCloneCompose.core.models.Message
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.text.SimpleDateFormat

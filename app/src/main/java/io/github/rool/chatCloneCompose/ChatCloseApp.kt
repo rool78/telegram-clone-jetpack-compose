@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose
+package io.github.rool.chatCloneCompose
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

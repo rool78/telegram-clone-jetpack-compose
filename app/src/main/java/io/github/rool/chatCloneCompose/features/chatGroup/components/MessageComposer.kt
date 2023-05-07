@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.features.chat_group.components
+package io.github.rool.chatCloneCompose.features.chatGroup.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,16 +26,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopup
-import io.github.rool.chat_clone_compose.core.ui.theme.ChatclonsecomposeTheme
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGrey50
+import io.github.rool.chatCloneCompose.core.ui.components.NotAvailablePopup
+import io.github.rool.chatCloneCompose.core.ui.theme.ChatCloneComposeTheme
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue40
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
 
 @Preview(showBackground = true)
 @Composable
 fun MessageComposerPreview() {
-    ChatclonsecomposeTheme {
+    ChatCloneComposeTheme {
         MessageComposer { }
     }
 }

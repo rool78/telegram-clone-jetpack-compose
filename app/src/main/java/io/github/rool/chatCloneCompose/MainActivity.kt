@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose
+package io.github.rool.chatCloneCompose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,11 +10,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.rool.chat_clone_compose.core.navigation.ChatCloneScreens
-import io.github.rool.chat_clone_compose.core.ui.theme.ChatclonsecomposeTheme
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
-import io.github.rool.chat_clone_compose.features.chat_group.ChatGroupScreen
-import io.github.rool.chat_clone_compose.features.lobby.LobbyScreen
+import io.github.rool.chatCloneCompose.core.navigation.ChatCloneScreens
+import io.github.rool.chatCloneCompose.core.ui.theme.ChatCloneComposeTheme
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue40
+import io.github.rool.chatCloneCompose.features.chatGroup.ChatGroupScreen
+import io.github.rool.chatCloneCompose.features.lobby.LobbyScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,11 +22,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChatclonsecomposeTheme {
+            ChatCloneComposeTheme {
                 val systemUiController = rememberSystemUiController()
                 SideEffect {
                     systemUiController.setStatusBarColor(
-                        color = TelegramBlue40,
+                        color = TelegramBlue40
                     )
                 }
                 val navController = rememberNavController()

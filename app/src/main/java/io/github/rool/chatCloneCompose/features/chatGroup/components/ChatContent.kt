@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.features.chat_group.components
+package io.github.rool.chatCloneCompose.features.chatGroup.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,11 +32,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import io.github.rool.chat_clone_compose.core.models.Message
-import io.github.rool.chat_clone_compose.core.ui.components.ScrollDownFab
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGreen50
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGreen80
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramGrey50
+import io.github.rool.chatCloneCompose.core.models.Message
+import io.github.rool.chatCloneCompose.core.ui.components.ScrollDownFab
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGreen50
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGreen80
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramGrey50
 import io.github.rool.chat_clonse_compose.R
 import kotlinx.coroutines.launch
 
@@ -70,7 +70,7 @@ fun ChatContent(modifier: Modifier, messages: List<Message>) {
             ScrollDownFab(
                 Modifier
                     .align(BottomEnd)
-                    .padding(16.dp),
+                    .padding(16.dp)
             ) {
                 scope.launch {
                     listState.animateScrollToItem(messages.size)
@@ -95,7 +95,8 @@ fun Message(
                     .align(Bottom)
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(message.authorColor), message.toDefaultProfileAuthor()
+                    .background(message.authorColor),
+                message.toDefaultProfileAuthor()
             )
         }
         if (isFromAuthor) {
@@ -135,7 +136,8 @@ fun MessageBox(message: Message, isFirstMessage: Boolean, isLastMessage: Boolean
             }
             Row {
                 Text(
-                    text = message.content, modifier = Modifier
+                    text = message.content,
+                    modifier = Modifier
                         .padding(end = 4.dp)
                         .weight(1f, false)
                 )
@@ -159,7 +161,8 @@ fun MessageFromAuthorBox(message: Message, isLastMessage: Boolean) {
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
             Text(
-                text = message.content, modifier = Modifier
+                text = message.content,
+                modifier = Modifier
                     .padding(end = 4.dp)
                     .weight(1f, false)
             )
@@ -170,7 +173,8 @@ fun MessageFromAuthorBox(message: Message, isLastMessage: Boolean) {
                 color = TelegramGreen50
             )
             Image(
-                imageVector = Icons.Filled.DoneAll, contentDescription = null,
+                imageVector = Icons.Filled.DoneAll,
+                contentDescription = null,
                 colorFilter = ColorFilter.tint(TelegramGreen50),
                 modifier = Modifier
                     .size(18.dp)

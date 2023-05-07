@@ -1,4 +1,4 @@
-package io.github.rool.chat_clone_compose.features.chat_group.components
+package io.github.rool.chatCloneCompose.features.chatGroup.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -24,17 +24,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopUpVisibility
-import io.github.rool.chat_clone_compose.core.ui.components.NotAvailablePopup
-import io.github.rool.chat_clone_compose.core.ui.components.isVisible
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue40
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramBlue80
-import io.github.rool.chat_clone_compose.features.chat_group.ChatUiState
+import io.github.rool.chatCloneCompose.core.ui.components.NotAvailablePopUpVisibility
+import io.github.rool.chatCloneCompose.core.ui.components.NotAvailablePopup
+import io.github.rool.chatCloneCompose.core.ui.components.isVisible
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue40
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramBlue80
+import io.github.rool.chatCloneCompose.features.chatGroup.ChatUiState
 import io.github.rool.chat_clonse_compose.R
 
 @Composable
 fun ChatTopBar(navController: NavController, uiState: ChatUiState) {
-    var notAvailablePopupVisibility by rememberSaveable { mutableStateOf(NotAvailablePopUpVisibility.GONE) }
+    var notAvailablePopupVisibility by rememberSaveable {
+        mutableStateOf(
+            NotAvailablePopUpVisibility.GONE
+        )
+    }
     if (notAvailablePopupVisibility.isVisible()) {
         NotAvailablePopup { notAvailablePopupVisibility = NotAvailablePopUpVisibility.GONE }
     }
@@ -54,7 +58,8 @@ fun ChatTopBar(navController: NavController, uiState: ChatUiState) {
                 .padding(4.dp)
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(uiState.chat.defaultColor), uiState.chat.defaultTitle
+                .background(uiState.chat.defaultColor),
+            uiState.chat.defaultTitle
         )
         ChatDescription(
             modifier = Modifier

@@ -1,15 +1,15 @@
-package io.github.rool.chat_clone_compose.core.models
+package io.github.rool.chatCloneCompose.core.models
 
 import androidx.compose.ui.graphics.Color
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault1
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault2
-import io.github.rool.chat_clone_compose.core.ui.theme.TelegramDefault3
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramDefault1
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramDefault2
+import io.github.rool.chatCloneCompose.core.ui.theme.TelegramDefault3
 
 data class Message(
     val author: String,
     val authorColor: Color,
     val content: String,
-    val timestamp: String,
+    val timestamp: String
 ) {
 
     fun isFromAuthor(): Boolean = author == AUTHOR_NAME
@@ -54,9 +54,8 @@ data class Message(
             Message("Oficial Barb", TelegramDefault2, "Ah, ok", "15:40"),
             Message("Frank.klyn", TelegramDefault1, "I'm bored", "11:43"),
             Message("Frank.klyn", TelegramDefault1, "Any1 watching match 10?", "11:53"),
-            Message("Frank.klyn", TelegramDefault1, "Ding Liren may win", "11:53"),
+            Message("Frank.klyn", TelegramDefault1, "Ding Liren may win", "11:53")
         )
-
 
         const val AUTHOR_NAME = "me"
     }

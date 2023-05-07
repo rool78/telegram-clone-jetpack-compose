@@ -1,6 +1,6 @@
-package io.github.rool.chat_clone_compose.features.chat_group
+package io.github.rool.chatCloneCompose.features.chatGroup
 
-import io.github.rool.chat_clone_compose.core.models.Chat
+import io.github.rool.chatCloneCompose.core.models.Chat
 
 data class ChatUiState(val chat: Chat) {
     companion object {
